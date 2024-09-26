@@ -1,0 +1,27 @@
+{{define "main"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valkyrie</title>
+  {{if eq .Env "development"}}
+  <script type="module" src="http://localhost:5173/@vite/client"></script>
+  <script type="module" src="http://localhost:5173/main.js"></script>
+  {{else}}
+    {{range .Assets.Links}}
+    <link rel="stylesheet" href="{{.}}">
+    {{end}}
+    {{range .Assets.Scripts}}
+    <script defer type="module" src="{{.}}"></script>
+    {{end}}
+  {{end}}
+</head>
+<body>
+
+  {{block "content" .}}{{end}}
+
+</body>
+</html>
+{{end}}
